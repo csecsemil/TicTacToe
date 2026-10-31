@@ -6,6 +6,8 @@ const mode3pButton = document.getElementById('m3');
 const modal = document.getElementById('modal')
 const closeModalButton = document.getElementById('modal-close-button');
 
+const modalMsg = document.getElementById('pop-msg');
+
 
 let gameActive = true;
 let currentPlayer = 'X';
@@ -24,7 +26,9 @@ const currentPlayerTurn = (player) => `Player ${player} turn!`;
 
 function createGameBoard() {
     gameBoard.innerHTML ='';
-    gameBoard.className = `grid board -${boardSize}x${boardSize}`;
+
+    gameBoard.style.gridTemplateColumns = `repeat(${boardSize}, 1fr)`; // beallitjuk a tabla meretet
+    gameBoard.style.gridTemplateRows = `repeat(${boardSize}, 1fr)`; 
 
     const totalCells = boardSize * boardSize;
     gameState = Array(totalCells).fill('');
@@ -42,7 +46,7 @@ function createGameBoard() {
 //kovi jatekos
 function handlePlayerChange() {
     //melyik jatekos lista kell
-    const curPlayer = gameMode === '2P' ? p2 : p3;
+    const curPlayers = gameMode === '2P' ? player2P : player3P;
     //jelenlegi jatekos indexe
     const curIdx = curPlayers.indexOf(currentPlayer);
     //kovetkezo jatekos indexe
@@ -73,13 +77,12 @@ function handleCellClick(event) {
 
 function checkWin() {//ellenorizzuk a nyeresi felteteleket
     const N = boardSize;//tabla merete
-    const K = winLen;//nyeresi feltetel hossza
+    const K = winConditionLength;//nyeresi feltetel hossza
 
-    
-    const currentPlayer = gameMode ==='2P' ? p2 : p3; // melyik jatekos lista kell
+    const curPlayers = gameMode === '2P' ? player2P : player3P; // melyik jatekos lista kell
 
-    for (const player of players) {
-        for (let row = 0; row < N; row++) {
+    for (const player of curPlayers) {//minden jatekosra ellenorizzuk a nyeresi felteteleket
+        for (let row = 0; row < N; row++) {//sorok ellenőrzése
             for (let col = 0; col <= N - K; col++) {
                 let combo = [];
                 let isWin = true;
@@ -92,11 +95,11 @@ function checkWin() {//ellenorizzuk a nyeresi felteteleket
                     combo.push(index);
                 }
                 if (isWin) return { winner: player, combo };
-            }
+            }  
         }
 
-        for (let col = 0; col < N; col++) {
-            for (let row = 0; row < N; row++) {
+        for (let col = 0; col < N; col++) {//oszlopok ellenőrzése
+            for (let row = 0; row <= N - K; row++) {
                 let combo = [];
                 let isWin = true;
                 for (let k = 0; k < K; k++) {
@@ -111,8 +114,25 @@ function checkWin() {//ellenorizzuk a nyeresi felteteleket
             }
         }
 
-        for (let row =0; row <= N; row++) {//főátló ellenőrzése
-            for (let col = 0; col <= N - K; col++) {
+        // másodlagos átló ellenőrzése
+        for (let row =0; row <= N; row++) {
+            for (let col = N - 1; col <= K - 1; col--) {
+                let combo = [];
+                let isWin = true;
+                for (let k = 0; k < K; k++) {
+                    const index = (row + k) * N + (col - k);
+                    if (gameState[index] !== player) {
+                        isWin = false;
+                        break;
+                    }
+                    combo.push(index);
+                }
+                if (isWin) return { winner: player, combo };
+            }
+        }
+
+        for (let row =0; row <= N; row++) {
+            for (let col = 0; col < N; row++) {
                 let combo = [];
                 let isWin = true;
                 for (let k = 0; k < K; k++) {
@@ -129,4 +149,7 @@ function checkWin() {//ellenorizzuk a nyeresi felteteleket
     }
     return { winner: null, combo: [] };
 }
+
+createGameBoard();
+statusDisplay.textContent = currentPlayerTurn(currentPlayer);
 

@@ -10,21 +10,23 @@
     <h1>Tic Tac Toe</h1>
 
     <div>
-        <button id="m2">2 Player (3x3)</button>
+        <button id="m2" class="active">2 Player (3x3)</button>
         <button id="m3">3 Player (5x5)</button>
         <button id="rst-btn">Reset</button>
     </div>
 
-    <div class="msg" id="status">player x</div>
+    <div class="msg" id="status">Player x turn!</div>
 
     <div class="grid" id="game-board"></div>
 
     <div class="pop hidden" id="modal">
         <div class="pop-cnt">
-            <div class="pop-cnt"></div>
+            <div class="pop-cnt" id="pop-cnt"></div>
             <button id="modal-close-button">New game!</button>
         </div>
     </div>
+
+    <div id="modal-message"></div>
 
 
     <script src="TicTacToe.js"></script>
