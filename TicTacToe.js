@@ -71,11 +71,62 @@ function handleCellClick(event) {
 
 }
 
-function chekWin() {
+function checkWin() {//ellenorizzuk a nyeresi felteteleket
     const N = boardSize;//tabla merete
     const K = winLen;//nyeresi feltetel hossza
 
     
     const currentPlayer = gameMode ==='2P' ? p2 : p3; // melyik jatekos lista kell
 
+    for (const player of players) {
+        for (let row = 0; row < N; row++) {
+            for (let col = 0; col <= N - K; col++) {
+                let combo = [];
+                let isWin = true;
+                for (let k = 0; k < K; k++) {
+                    const index = row * N + (col + k);
+                    if (gameState[index] !== player) {
+                        isWin = false;
+                        break;
+                    }
+                    combo.push(index);
+                }
+                if (isWin) return { winner: player, combo };
+            }
+        }
+
+        for (let col = 0; col < N; col++) {
+            for (let row = 0; row < N; row++) {
+                let combo = [];
+                let isWin = true;
+                for (let k = 0; k < K; k++) {
+                    const index = (row + k) * N + col;
+                    if (gameState[index] !== player) {
+                        isWin = false;
+                        break;
+                    }
+                    combo.push(index);
+                }
+                if (isWin) return { winner: player, combo };
+            }
+        }
+
+        for (let row =0; row <= N; row++) {//főátló ellenőrzése
+            for (let col = 0; col <= N - K; col++) {
+                let combo = [];
+                let isWin = true;
+                for (let k = 0; k < K; k++) {
+                    const index = (row + k) * N + (col + k);
+                    if (gameState[index] !== player) {
+                        isWin = false;
+                        break;
+                    }
+                    combo.push(index);
+                }
+                if (isWin) return { winner: player, combo };
+            }
+        }
+    }
+    return { winner: null, combo: [] };
 }
+
