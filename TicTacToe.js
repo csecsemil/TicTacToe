@@ -84,6 +84,7 @@ function checkWin() {//ellenorizzuk a nyeresi felteteleket
     const curPlayers = gameMode === '2P' ? player2P : player3P; // melyik jatekos lista kell
 
     for (const player of curPlayers) {//minden jatekosra ellenorizzuk a nyeresi felteteleket
+        
         for (let row = 0; row < N; row++) {// sor ellenőrzése
             for (let col = 0; col <= N - K; col++) {// soron belüli oszlopok ellenőrzése
                 let combo = [];//nyerő kombináció indexei
@@ -116,13 +117,13 @@ function checkWin() {//ellenorizzuk a nyeresi felteteleket
             }
         }
 
-        
-        for (let row =0; row <= N - K; row++) {// másodlagos átló ellenőrzése
+        //3.
+        for (let row = 0; row <= N - K; row++) {//átló ellenőrzése
             for (let col = 0; col <= N - K; col++) {
                 let combo = [];
                 let isWin = true;
                 for (let k = 0; k < K; k++) {
-                    const index = (row + k) * N + (col - k);
+                    const index = (row + k) * N + (col + k);
                     if (gameState[index] !== player) {
                         isWin = false;
                         break;
@@ -134,11 +135,11 @@ function checkWin() {//ellenorizzuk a nyeresi felteteleket
         }
 
         for (let row = 0; row <= N - K; row++) {
-            for (let col = K -1 ; col < N; col++) {// elsődleges átló ellenőrzése
+            for (let col = K - 1; col < N; col++) {
                 let combo = [];
                 let isWin = true;
                 for (let k = 0; k < K; k++) {
-                    const index = (row + k) * N + (col + k);
+                    const index = (row + k) * N + (col - k);
                     if (gameState[index] !== player) {
                         isWin = false;
                         break;
