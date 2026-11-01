@@ -198,7 +198,7 @@ closeModalButton.addEventListener('click', () => {
     createGameBoard();
 });
 
-/*mode2pButton.addEventListener('click', () => {
+mode2pButton.addEventListener('click', () => {
     gameMode = '2P';
     boardSize = 3;
     mode2pButton.classList.add('active');
@@ -221,8 +221,13 @@ mode3pButton.addEventListener('click', () => {
 });
 
 
+function showModal(message) {
+    modalMsg.innerHTML = message;
+    modal.classList.remove('hidden');
+}
+
+
 
 
 createGameBoard();
 
-*/
