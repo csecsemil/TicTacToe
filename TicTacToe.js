@@ -178,4 +178,19 @@ function validateResult() {
     handlePlayerChange();
 }
 
-function
+function handleRestartMode(mode) {
+    if (gameMode !== mode) {
+        gameMode = mode;
+        boardSize = mode === '2P' ? 3 : 5;
+
+        mode2pButton.classList.remove('active');
+        mode3pButton.classList.remove('active');
+
+        if (mode === '2P'){
+            mode2pButton.classList.remove('active');
+        }else {
+            mode3pButton.classList.remove('active');
+        }
+    }
+};
+
