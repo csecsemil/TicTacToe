@@ -118,7 +118,7 @@ function checkWin() {//ellenorizzuk a nyeresi felteteleket
 
         
         for (let row =0; row <= N - K; row++) {// másodlagos átló ellenőrzése
-            for (let col = N - 1; col <= K - K; col++) {
+            for (let col = 0; col <= N - K; col++) {
                 let combo = [];
                 let isWin = true;
                 for (let k = 0; k < K; k++) {
@@ -133,8 +133,8 @@ function checkWin() {//ellenorizzuk a nyeresi felteteleket
             }
         }
 
-        for (let row =0; row <= N - K; row++) {
-            for (let col = 0; col < N; col++) {// elsődleges átló ellenőrzése
+        for (let row = 0; row <= N - K; row++) {
+            for (let col = K -1 ; col < N; col++) {// elsődleges átló ellenőrzése
                 let combo = [];
                 let isWin = true;
                 for (let k = 0; k < K; k++) {
@@ -190,4 +190,27 @@ resetButton.addEventListener('click', () => {
 });
 
 
+
+closeModalButton.addEventListener('click', () => {
+    modal.classList.add('hidden');
+    gameActive = true;
+    currentPlayer = 'X';
+    statusDisplay.innerHTML = currentPlayerTurn(currentPlayer);
+    createGameBoard();
+});
+
+mode2pButton.addEventListener('click', () => {
+    gameMode = '2P';
+    mode2pButton.classList.add('active');
+    mode3pButton.classList.add('active');
+    gameActive = true;
+    currentPlayer = 'X';
+    statusDisplay
+});
+
+
+
+
+
 createGameBoard();
+
