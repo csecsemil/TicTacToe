@@ -41,6 +41,8 @@ function createGameBoard() {
         cell.addEventListener('click', handleCellClick);
         gameBoard.appendChild(cell);
     }
+
+    
 } 
 
 //kovi jatekos
@@ -156,7 +158,7 @@ function validateResult() {
 
     if (res.winner) {//ha van nyertes
         gameActive = false;//jatek veget ert
-        const txt = winnerMessage(res.winner);
+        const txt = winningMessage(res.winner);
         statusDisplay.innerHTML = txt;
 
         res.combo.forEach(i => {//kiemeljük a nyerő kombinációt
@@ -178,9 +180,14 @@ function validateResult() {
 
     handlePlayerChange();
 }
-function showModal(message) {
-    modalMsg.innerHTML = message;
-    modal.classList.remove('hidden');
-}
+
+resetButton.addEventListener('click', () => {
+    gameActive = true;
+    currentPlayer = 'X';
+    statusDisplay.innerHTML = currentPlayerTurn(currentPlayer);
+    modal.classList.add('hidden');
+    createGameBoard();
+});
 
 
+createGameBoard();

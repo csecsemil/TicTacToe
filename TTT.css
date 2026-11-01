@@ -16,6 +16,7 @@ body {
 }
 
 .board-3x3 {
+    align-items: center;
     grid-template-columns: repeat(3, 1fr);
 }
 
