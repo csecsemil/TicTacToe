@@ -57,5 +57,32 @@ button:hover {
     background-color: #ddd;
 }
 button:active {
-    background-color: #ccc;
+    background-color: #007bff;
+    color: #fff;
+    border-color: #0056b3;
+}
+
+button.active:hover {
+    background-color: #0056b3;
+}
+
+.cell:hover {
+    background-color: #e9ecef;
+}
+
+.cell.X {
+    color: #dc3545;
+}
+
+.cell.O {
+    color: #075ca1;
+}
+
+.cell.z {
+    color: #77cc07;
+}
+
+.cell.win {
+    background-color: #b9eec6;   
+    color
 }
