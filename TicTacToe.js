@@ -192,14 +192,13 @@ resetButton.addEventListener('click', () => {
 
 
 closeModalButton.addEventListener('click', () => {
-    modal.classList.add('hidden');
     gameActive = true;
     currentPlayer = 'X';
     statusDisplay.innerHTML = currentPlayerTurn(currentPlayer);
     createGameBoard();
 });
 
-mode2pButton.addEventListener('click', () => {
+/*mode2pButton.addEventListener('click', () => {
     gameMode = '2P';
     boardSize = 3;
     mode2pButton.classList.add('active');
@@ -226,3 +225,4 @@ mode3pButton.addEventListener('click', () => {
 
 createGameBoard();
 
+*/
