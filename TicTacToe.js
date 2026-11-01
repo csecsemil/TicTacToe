@@ -6,7 +6,7 @@ const mode3pButton = document.getElementById('m3');
 const modal = document.getElementById('modal')
 const closeModalButton = document.getElementById('modal-close-button');
 
-const modalMsg = document.getElementById('pop-msg');
+const modalMsg = document.getElementById('modal-message');
 
 
 let gameActive = true;
@@ -52,7 +52,7 @@ function handlePlayerChange() {
     //kovetkezo jatekos indexe
     const nextIdx = (curIdx + 1) % curPlayers.length;
     currentPlayer = curPlayers[nextIdx];
-    msg.innerHTML = turnTxt(currentPlayer);
+    statusDisplay.innerHTML = currentPlayerTurn(currentPlayer);
 }
 
 function handleCellClick(event) {
@@ -98,7 +98,7 @@ function checkWin() {//ellenorizzuk a nyeresi felteteleket
             }  
         }
 
-        for (let col = 0; col < N; col++) {//oszlop ellenőrzése
+        for (let col = 0; col < N; col++) {
             for (let row = 0; row <= N - K; row++) {
                 let combo = [];
                 let isWin = true;
@@ -115,8 +115,8 @@ function checkWin() {//ellenorizzuk a nyeresi felteteleket
         }
 
         
-        for (let row =0; row <= N; row++) {// másodlagos átló ellenőrzése
-            for (let col = N - 1; col <= K - 1; col--) {
+        for (let row =0; row <= N - K; row++) {// másodlagos átló ellenőrzése
+            for (let col = N - 1; col <= K - K; col++) {
                 let combo = [];
                 let isWin = true;
                 for (let k = 0; k < K; k++) {
@@ -131,7 +131,7 @@ function checkWin() {//ellenorizzuk a nyeresi felteteleket
             }
         }
 
-        for (let row =0; row <= N; row++) {
+        for (let row =0; row <= N - K; row++) {
             for (let col = 0; col < N; col++) {// elsődleges átló ellenőrzése
                 let combo = [];
                 let isWin = true;
@@ -175,39 +175,12 @@ function validateResult() {
         return;
     }
 
+
     handlePlayerChange();
 }
-
-function handleRestartMode(mode) {
-    if (gameMode !== mode) {
-        gameMode = mode;
-        boardSize = mode === '2P' ? 3 : 5;
-
-        mode2pButton.classList.remove('active');
-        mode3pButton.classList.remove('active');
-
-        if (mode === '2P'){
-            mode2pButton.classList.remove('active');
-        }else {
-            mode3pButton.classList.remove('active');
-        }
-    }
-};
-
-function showModal(text) {
-    modalMsg.innerHTML = text;
+function showModal(message) {
+    modalMsg.innerHTML = message;
     modal.classList.remove('hidden');
 }
 
-function hideModal() {
-    modal.classList.add('hidden');
-}
 
-resetButton.addEventListener('click', handleRestartMode);
-closeModalButton.addEventListener('click', handleRestartMode);
-mode2pButton.addEventListener('click' () => changeGameMode('2P'));
-mode3pButton.addEventListener('click' => changeGameMode('3P'));
-
-window.onload = () => {
-    changeGameMode('2P');
-}

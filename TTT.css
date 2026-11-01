@@ -22,3 +22,39 @@ body {
 .board-5x5 {
     grid-template-columns: repeat(5, 1fr);
 }
+
+.grid {
+    display: grid;
+    gap: 5px;
+    width: min(90vw, 450px);
+    aspect-ratio: 1;
+}
+
+.cell {
+    width: 70px;
+    height: 70px;
+    min-width: 70px;
+    min-height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    font-size: 32px;
+    font-weight: bold;
+    cursor: pointer;
+    user-select: none;/* Prevent text selection */
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+button:hover {
+    background-color: #ddd;
+}
+button:active {
+    background-color: #ccc;
+}
