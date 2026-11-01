@@ -201,13 +201,25 @@ closeModalButton.addEventListener('click', () => {
 
 mode2pButton.addEventListener('click', () => {
     gameMode = '2P';
+    boardSize = 3;
     mode2pButton.classList.add('active');
-    mode3pButton.classList.add('active');
+    mode3pButton.classList.remove('active');
     gameActive = true;
     currentPlayer = 'X';
-    statusDisplay
+    statusDisplay.innerHTML = currentPlayerTurn(currentPlayer);
+    createGameBoard();
 });
 
+mode3pButton.addEventListener('click', () => {
+    gameMode = '3P';
+    boardSize = 5;
+    mode3pButton.classList.add('active');
+    mode2pButton.classList.remove('active');
+    gameActive = true;
+    currentPlayer = 'X';
+    statusDisplay.innerHTML = currentPlayerTurn(currentPlayer);
+    createGameBoard();
+});
 
 
 
