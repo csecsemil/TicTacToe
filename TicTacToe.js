@@ -82,23 +82,23 @@ function checkWin() {//ellenorizzuk a nyeresi felteteleket
     const curPlayers = gameMode === '2P' ? player2P : player3P; // melyik jatekos lista kell
 
     for (const player of curPlayers) {//minden jatekosra ellenorizzuk a nyeresi felteteleket
-        for (let row = 0; row < N; row++) {//sorok ellenőrzése
-            for (let col = 0; col <= N - K; col++) {
-                let combo = [];
-                let isWin = true;
-                for (let k = 0; k < K; k++) {
-                    const index = row * N + (col + k);
-                    if (gameState[index] !== player) {
-                        isWin = false;
+        for (let row = 0; row < N; row++) {// sor ellenőrzése
+            for (let col = 0; col <= N - K; col++) {// soron belüli oszlopok ellenőrzése
+                let combo = [];//nyerő kombináció indexei
+                let isWin = true;//nyerés feltétele
+                for (let k = 0; k < K; k++) {//ellenőrizzük a K hosszú kombinációt
+                    const index = row * N + (col + k);//index kiszámítása
+                    if (gameState[index] !== player) {//ha a cella nem a jelenlegi jatekos jele, akkor nem nyert
+                        isWin = false;//kilépünk a ciklusból
                         break;
                     }
-                    combo.push(index);
+                    combo.push(index);//
                 }
-                if (isWin) return { winner: player, combo };
+                if (isWin) return { winner: player, combo };//ha nyert, visszaadjuk a nyert jatekos jelet és a nyerő kombináció indexeit
             }  
         }
 
-        for (let col = 0; col < N; col++) {//oszlopok ellenőrzése
+        for (let col = 0; col < N; col++) {//oszlop ellenőrzése
             for (let row = 0; row <= N - K; row++) {
                 let combo = [];
                 let isWin = true;
@@ -114,8 +114,8 @@ function checkWin() {//ellenorizzuk a nyeresi felteteleket
             }
         }
 
-        // másodlagos átló ellenőrzése
-        for (let row =0; row <= N; row++) {
+        
+        for (let row =0; row <= N; row++) {// másodlagos átló ellenőrzése
             for (let col = N - 1; col <= K - 1; col--) {
                 let combo = [];
                 let isWin = true;
@@ -132,7 +132,7 @@ function checkWin() {//ellenorizzuk a nyeresi felteteleket
         }
 
         for (let row =0; row <= N; row++) {
-            for (let col = 0; col < N; row++) {
+            for (let col = 0; col < N; col++) {// elsődleges átló ellenőrzése
                 let combo = [];
                 let isWin = true;
                 for (let k = 0; k < K; k++) {
@@ -150,6 +150,32 @@ function checkWin() {//ellenorizzuk a nyeresi felteteleket
     return { winner: null, combo: [] };
 }
 
-createGameBoard();
-statusDisplay.textContent = currentPlayerTurn(currentPlayer);
 
+function validateResult() {
+    const res = checkWin();
+
+    if (res.winner) {//ha van nyertes
+        gameActive = false;//jatek veget ert
+        const txt = winnerMessage(res.winner);
+        statusDisplay.innerHTML = txt;
+
+        res.combo.forEach(i => {//kiemeljük a nyerő kombinációt
+            document.querySelector(`.cell[data-index="${i}"]`).classList.add('win');
+        });
+
+        showModal(txt);
+        return;//ha van nyertes, akkor kilepunk
+    }
+
+    let isDraw = !gameState.includes('');//ha nincs üres cella, akkor döntetlen
+    if (isDraw) {
+        gameActive = false;
+        statusDisplay.innerHTML = drawMessage;
+        showModal(drawMessage);
+        return;
+    }
+
+    handlePlayerChange();
+}
+
+function
