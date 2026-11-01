@@ -194,3 +194,20 @@ function handleRestartMode(mode) {
     }
 };
 
+function showModal(text) {
+    modalMsg.innerHTML = text;
+    modal.classList.remove('hidden');
+}
+
+function hideModal() {
+    modal.classList.add('hidden');
+}
+
+resetButton.addEventListener('click', handleRestartMode);
+closeModalButton.addEventListener('click', handleRestartMode);
+mode2pButton.addEventListener('click' () => changeGameMode('2P'));
+mode3pButton.addEventListener('click' => changeGameMode('3P'));
+
+window.onload = () => {
+    changeGameMode('2P');
+}
