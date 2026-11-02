@@ -10,9 +10,18 @@ body {
 }
 
 h1 {
-    background-color: #155724;
+    background-color: #e3e4e3;
     margin-bottom: 5px;
+    grid-column: 1 / -1;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+    line-height: 50px;
 }
+
+
 
 .msg {
     font-weight: bold;
