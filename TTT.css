@@ -1,7 +1,7 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
-    color: #333;
+    background-color: var(--bg-color);
+    color: var(--text-color);
     margin: 0;
     padding: 20px;
     display: flex;
@@ -39,7 +39,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #e2e2e2;
+    background-color: var(--cel-bg);
     font-size: 32px;
     font-weight: bold;
     cursor: pointer;
@@ -47,6 +47,9 @@ body {
 }
 
 button {
+    background-color: var(--btn-bg);
+    color: var(--btn-text);
+    border: var(--border-color);
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
@@ -54,7 +57,7 @@ button {
 }
 
 button:hover {
-    background-color: #ddd;
+    background-color: #696969;
 }
 button:active {
     background-color: #007bff;
@@ -69,7 +72,7 @@ button.active:hover {
 
 
 .cell:hover {
-    background-color: #47535f;
+    background-color: var(--cell-hover);
 }
 
 .cell.X {
@@ -91,3 +94,28 @@ button.active:hover {
 }
 
 
+
+
+:root {
+    --bg-color: #f0f0f0;
+    --text-color: #333;
+    --cel-bg: #c4c4c4;
+    --cell-hover: #c4c4c4;
+    --btn-bg: #fff;
+    --btn-text: #333;
+    --btn-hover: #ddd;
+    --border-color: #ccc;
+
+}
+
+[data-theme="dark"] {
+    --bg-color: #1a1a1a;
+    --text-color: #f0f0f0;
+    --cel-bg: #b4b1b1;
+    --cell-hover: #4e4e4e;
+    --btn-bg: #1f1e1e;
+    --btn-text: #9c9a9a;
+    --btn-hover: #7e6666;
+    --border-color: #272727;
+
+}

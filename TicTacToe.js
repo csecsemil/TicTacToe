@@ -9,6 +9,22 @@ const closeModalButton = document.getElementById('modal-close-button');
 const modalMsg = document.getElementById('modal-message');
 
 
+
+const themeToggleBtn = document.getElementById('theme-toggle-btn');
+
+themeToggleBtn.addEventListener('click', () => {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+
+    if (currentTheme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'light');
+        themeToggleBtn.innerHTML = 'dark';
+    } else {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        themeToggleBtn.innerHTML = 'light';
+    }
+});
+
+
 let gameActive = true;
 let currentPlayer = 'X';
 let gameState = [];
