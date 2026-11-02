@@ -29,6 +29,9 @@ body {
     gap: 5px;
     width: min(90vw, 450px);
     aspect-ratio: 1;
+    box-shadow: 0 10px 20px wheat;
+    border-radius: 12px;
+    padding: 5px;
 }
 
 .cell {
@@ -44,12 +47,14 @@ body {
     font-weight: bold;
     cursor: pointer;
     user-select: none;/* Prevent text selection */
+    border-radius: 8px;
 }
 
 button {
     background-color: var(--btn-bg);
     color: var(--btn-text);
     border: var(--border-color);
+    border-radius: 5px;
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
